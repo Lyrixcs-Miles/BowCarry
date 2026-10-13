@@ -9,7 +9,7 @@ It's one HTML file with the CSS and JS inline. No build step, no dependencies. O
 ## What's here
 
 - `index.html` - the page
-- `resources/` - product photos go here (empty for now)
+- `resources/imgs/` - product images as WebP, named `colour-view.webp` with a `-thumb` version of each
 - `CNAME` - custom domain for GitHub Pages, `bowcarry.azhyre.co.za`
 
 ## Notes on the page
@@ -18,7 +18,7 @@ Things that aren't obvious from reading the markup:
 
 **Stock count is manual.** The number lives in `#stock-count` in the buy box, and again in the "Only 10 sets left" sticker on the image. Change both after every sale. They don't update themselves.
 
-**Colours.** Clicking a swatch or thumbnail sets the `--cup` CSS variable, which recolours the illustration. Blush pink, Lilac and Deep plum are sample names until the real colourways are confirmed.
+**Gallery.** The swatches pick the colour (pink or black) and the three thumbnails pick the view: the set on the flask, every piece laid out, and the flask alone. The image path is built from those two, so adding a colour means adding `colour-set`, `colour-set-contents` and `colour-flask` images plus a swatch button. The images are renders, not photos, and the caption under the main image says so.
 
 **Buy button.** The Shopify Buy Button renders into `#product-component-1791693860750`. Until it loads, a plain "Buy now" link (`#buy-fallback`) shows instead, and it gets hidden about 3 seconds in if the Shopify button is there. The button won't render at all until there's a real product ID.
 
@@ -70,7 +70,7 @@ Claims that have to be true or come out:
 2. Count stock: complete sets per colour, and whether I'm holding flasks or just the accessories.
 3. Create the Shopify product with colour variants, add the Buy Button channel, and put the product ID in the page.
 4. Get delivery time, free delivery threshold, return postage and insulation claims from the supplier in writing.
-5. Swap the illustration for real photos from `resources/`.
+5. Replace the renders with real photos of the stock, and make sure the pieces shown match what's actually in the box. Then drop the "Product render" caption.
 6. Add the GA4 ID, Meta Pixel ID and both verification codes.
 7. Connect a mailing list with double opt-in and set the form URL.
 8. Get the cookie wording and returns policy checked against the CPA and POPIA.
