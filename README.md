@@ -19,7 +19,8 @@ The Buy Button, fonts and tracking load from the internet, so those parts need a
 | Path | What it is |
 |---|---|
 | `index.html` | The whole page |
-| `resources/imgs/` | Product images |
+| `resources/imgs/` | Product images, plus `share.jpg` for link previews |
+| `resources/favicon.svg` | The bow icon in the browser tab |
 | `CNAME` | Tells GitHub Pages to serve the site on my domain |
 
 ## How I change things
@@ -78,7 +79,6 @@ Anything in `[SQUARE BRACKETS]` in `index.html` is something I still need to fil
 
 **Links and contact details**
 
-- `[PAGE URL]` in the product data at the top of the file
 - `[EMAIL]`, `[TERMS URL]`, `[PRIVACY URL]`, `[FULL POLICY URL]`
 - `[TIKTOK HANDLE]`, `[INSTAGRAM HANDLE]`, `[FACEBOOK PAGE]`, `[PINTEREST HANDLE]`
 
