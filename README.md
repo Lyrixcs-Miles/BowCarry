@@ -56,7 +56,7 @@ No JavaScript changes needed.
 
 ### Prices and text
 
-All of it is plain text in `index.html`. The price R299 appears in several places (the buy box, both buy buttons, the sticky bar, the closing banner, the page description and the product data at the top), so I search for `299` and change them together.
+All of it is plain text in `index.html`. The price appears in seven places (the page description and product data at the top, the buy box, the backup buy link, the closing banner, the sticky bar and the tracking code at the bottom), so I search for `299` and change them together.
 
 ## How the page behaves
 
