@@ -1,86 +1,128 @@
 # BowCarry
 
-Product page for The Complete Set: a 1200ml insulated flask with a daisy strap, pom-pom charm and straw lid, R299.
+This is the product page for my first product, The Complete Set: a 1200ml insulated flask that comes with its carry accessories, for R299.
 
-It's one HTML file with the CSS and JS inline. No build step, no dependencies. Open `index.html` in a browser to preview it.
+Live at https://bowcarry.azhyre.co.za
 
-**Not ready to launch.** The page still has placeholder text and claims I haven't confirmed. Everything that needs sorting is listed under [To do before launch](#to-do-before-launch).
+I kept it as simple as I could. It's one HTML file with the CSS and JavaScript inside it, plus a folder of images. There's nothing to install and nothing to build.
 
-## What's here
+**The page is up but it isn't finished.** I'm still waiting on details from my supplier, so some of the text is placeholder and a few claims aren't confirmed yet. My list of what's left is under [Before I launch](#before-i-launch).
 
-- `index.html` - the page
-- `resources/imgs/` - product images as WebP, named `colour-view.webp` with a `-thumb` version of each
-- `CNAME` - custom domain for GitHub Pages, `bowcarry.azhyre.co.za`
+## Running it
 
-## Notes on the page
+Open `index.html` in a browser. That's it.
 
-Things that aren't obvious from reading the markup:
+The Buy Button, fonts and tracking load from the internet, so those parts need a connection. Everything else works offline.
 
-**Stock count is manual.** The number lives in `#stock-count` in the buy box, and again in the "Only 10 sets left" sticker on the image. Change both after every sale. They don't update themselves.
+## What's in the repo
 
-**Gallery.** The swatches pick the colour (pink or black) and the three thumbnails pick the view: the set on the flask, every piece laid out, and the flask alone. The image path is built from those two, so adding a colour means adding `colour-set`, `colour-set-contents` and `colour-flask` images plus a swatch button. The images are renders, not photos, and the caption under the main image says so.
+| Path | What it is |
+|---|---|
+| `index.html` | The whole page |
+| `resources/imgs/` | Product images |
+| `CNAME` | Tells GitHub Pages to serve the site on my domain |
 
-**Buy button.** The Shopify Buy Button renders into `#product-component-1791693860750`. Until it loads, a plain "Buy now" link (`#buy-fallback`) shows instead, and it gets hidden about 3 seconds in if the Shopify button is there. The button won't render at all until there's a real product ID.
+## How I change things
 
-**Tracking waits for consent.** GA4 and Meta Pixel only load after someone clicks Accept on the cookie banner. The answer is saved in `localStorage` as `tracking-consent`. Only a page view and a product view are sent. Checkout and purchase events aren't set up yet and will need Shopify's order events.
+### Stock count
 
-**Signup form.** It validates the email and the consent tick box. While the form action is still a placeholder it shows "Sign-up is not connected yet." rather than pretending the signup worked.
+I update this by hand after every sale. The number is in two places in `index.html` and they have to match:
 
-**Reviews.** The slider works but every quote in it is a placeholder.
+- `#stock-count` in the buy box ("10 of 10 sets left in batch 1")
+- the "Only 10 sets left" sticker on the main image
+
+### Images
+
+Each colour has three images, and each image has a small version for the thumbnail:
+
+```
+pink-set.webp            pink-set-thumb.webp
+pink-set-contents.webp   pink-set-contents-thumb.webp
+pink-flask.webp          pink-flask-thumb.webp
+```
+
+`set` is everything fitted on the flask, `set-contents` is each piece laid out, and `flask` is the flask by itself. I save them as WebP so the page stays light on mobile data. The thumbnails are 200px wide.
+
+The images I'm using now are renders, not photos, which is why the caption under the main image says "Product render". I'll take that caption off when I replace them with real photos.
+
+### Adding a colour
+
+The page builds the image path from the colour and the view, so a new colour needs two things:
+
+1. Six images named like the ones above, starting with the colour name (`lilac-set.webp` and so on).
+2. One more swatch button in the buy box, copied from an existing one, with `data-colour="lilac"`, the display name in `data-name` and the swatch colour in `data-hex`.
+
+No JavaScript changes needed.
+
+### Prices and text
+
+All of it is plain text in `index.html`. The price R299 appears in several places (the buy box, both buy buttons, the sticky bar, the closing banner, the page description and the product data at the top), so I search for `299` and change them together.
+
+## How the page behaves
+
+A few things I'd forget if I didn't write them down.
+
+**Buy button.** The Shopify Buy Button loads into the buy box. Until it does, a plain "Buy now" link shows in its place, and that link is hidden a few seconds later if the Shopify button turned up. The Shopify button won't appear until I put a real product ID in.
+
+**Cookies and tracking.** Google Analytics and the Meta Pixel don't load until a visitor clicks Accept on the cookie banner. If they click Decline, nothing loads and the banner doesn't come back. Right now I only record a page view and a product view. I still need to add checkout and purchase tracking from the Shopify side.
+
+**Newsletter form.** It checks the email address and makes sure the consent box is ticked. I haven't connected a mailing list yet, so for now it tells people "Sign-up is not connected yet." I didn't want it saying thanks for signing up when nothing was saved.
+
+**Reviews.** The slider works, but the quotes in it are placeholders. I'm taking the section out until I have real reviews.
+
+**Sticky bar.** The buy bar at the bottom of the screen shows up once the main buy box has scrolled out of view.
 
 ## Placeholders
 
-Anything in `[SQUARE BRACKETS]` in `index.html` is a placeholder. Search for `[` to find them all.
+Anything in `[SQUARE BRACKETS]` in `index.html` is something I still need to fill in. Searching for `[` finds them all.
 
-Links and contact:
+**Links and contact details**
 
-- `[PAGE URL]` - final page address, used in the product structured data
+- `[PAGE URL]` in the product data at the top of the file
 - `[EMAIL]`, `[TERMS URL]`, `[PRIVACY URL]`, `[FULL POLICY URL]`
 - `[TIKTOK HANDLE]`, `[INSTAGRAM HANDLE]`, `[FACEBOOK PAGE]`, `[PINTEREST HANDLE]`
 
-Shop and tracking:
+**Shop and tracking**
 
-- `[NEW PRODUCT ID]` - Shopify product ID for the Buy Button
-- `[CHECKOUT LINK]` - fallback link, point it at the Shopify product page
-- `G-XXXXXXXXXX` - GA4 measurement ID
-- `PIXEL_ID` - Meta Pixel ID
-- `[GOOGLE VERIFICATION CODE]`, `[META VERIFICATION CODE]`
-- `[MAILING LIST FORM URL]` - where the signup form posts to
+- `[NEW PRODUCT ID]` is the Shopify product ID for the Buy Button
+- `[CHECKOUT LINK]` is the backup link, which should go to the Shopify product page
+- `G-XXXXXXXXXX` is my Google Analytics ID
+- `PIXEL_ID` is my Meta Pixel ID
+- `[GOOGLE VERIFICATION CODE]` and `[META VERIFICATION CODE]`
+- `[MAILING LIST FORM URL]` is where the newsletter form sends to
 
-Product facts, to get from the supplier in writing:
+**Product details I need from my supplier in writing**
 
-- `[AMOUNT]` - free delivery threshold
-- `[X]` - working days to ship
-- `[LOCATION]` - where orders ship from
-- `[CONFIRM]`, `[CONFIRM WITH SUPPLIER]` - material, insulation, dimensions, return postage, what photos a return needs
-- `[CONFIRM AFTER SHOP TEST]` - hold time and leak-proof. Test these myself before saying them.
+- `[AMOUNT]` free delivery threshold
+- `[X]` working days to ship
+- `[LOCATION]` where orders ship from
+- `[CONFIRM]` and `[CONFIRM WITH SUPPLIER]` cover the material, insulation, dimensions, who pays return postage and what photos I need for a return
+- `[CONFIRM AFTER SHOP TEST]` covers how long drinks stay cold and whether it's leak-proof. I'm testing both myself before I claim them.
 - `[CONFIRM REAL COLOURWAYS BEFORE LAUNCH]`
 
-Claims that have to be true or come out:
+**Things that have to be true or they come off the page**
 
-- `[RATING]`, `[N]`, `[Real review quote]`, `[Customer first name]`, `[city]` - take the whole reviews section out until there are real reviews. No made-up quotes or names.
+- `[RATING]`, `[N]`, `[Real review quote]`, `[Customer first name]`, `[city]`. I won't publish reviews I made up.
 - `[TRENDING: keep only if true]`
-- `[ORIGINAL PRICE]`, `[%]` - the crossed-out price and saving. Only keep them if there's a genuine discount.
-- `[PAYFLEX / PROVIDER]` - the pay-later line. Only keep it once a provider is signed up.
-- The "10 of 10 sets left" stock line has to match what's actually on the shelf.
+- `[ORIGINAL PRICE]` and `[%]`, the crossed-out price and the saving. These only stay if there's a real discount.
+- `[PAYFLEX / PROVIDER]`, the pay-later line. This only stays once I've signed up with a provider.
+- The stock line has to match what I actually have on the shelf.
 
-## To do before launch
+## Before I launch
 
-1. Trademark check on the BowCarry name (CIPC search, cipc.gov.za).
-2. Count stock: complete sets per colour, and whether I'm holding flasks or just the accessories.
-3. Create the Shopify product with colour variants, add the Buy Button channel, and put the product ID in the page.
-4. Get delivery time, free delivery threshold, return postage and insulation claims from the supplier in writing.
-5. Replace the renders with real photos of the stock, and make sure the pieces shown match what's actually in the box. Then drop the "Product render" caption.
-6. Add the GA4 ID, Meta Pixel ID and both verification codes.
-7. Connect a mailing list with double opt-in and set the form URL.
-8. Get the cookie wording and returns policy checked against the CPA and POPIA.
-9. Test on a phone and a desktop, Chrome and Safari.
+- [ ] Trademark check on the BowCarry name (CIPC search at cipc.gov.za)
+- [ ] Count my stock: complete sets per colour
+- [ ] Create the product in Shopify with the colour options, add the Buy Button channel, and put the product ID in the page
+- [ ] Get delivery time, free delivery threshold, return postage and insulation details from the supplier in writing
+- [ ] Rewrite the product description and the "In the box" section so they list exactly the pieces that ship
+- [ ] Replace the renders with real photos
+- [ ] Add my Google Analytics ID, Meta Pixel ID and both verification codes
+- [ ] Connect a mailing list with double opt-in
+- [ ] Have the cookie wording and returns policy checked against the Consumer Protection Act and POPIA
+- [ ] Test on a phone and a laptop, in Chrome and Safari
 
 ## Hosting
 
-The site is set up for GitHub Pages on `bowcarry.azhyre.co.za`.
+The site runs on GitHub Pages from the `main` branch, so anything I push to `main` goes live a minute or two later.
 
-- Pages: Settings > Pages > deploy from `main`, folder `/`.
-- Pages on a private repo needs a paid GitHub plan. On the free plan the repo has to be public, or the page has to be hosted somewhere else.
-- DNS: a CNAME record at GoDaddy with name `bowcarry` and value `lyrixcs-miles.github.io`.
-- Add the TXT record GitHub provides to verify the domain, then turn on Enforce HTTPS.
+The domain is `bowcarry.azhyre.co.za`. It's a CNAME record at GoDaddy with the name `bowcarry` pointing to `lyrixcs-miles.github.io`, and HTTPS is switched on in the Pages settings.
